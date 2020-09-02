@@ -15,12 +15,12 @@ I utilized Postman to double check my methods.
 - git Version Control
 
 ### Gif Showcase
-![gif of data on server](./src/images/server-storage.gif)</br>
-*Random user and user's pantry contents on page load*
+![gif of data on server](./images/server-storage.gif)</br>
+*Viewing hard-coded data on server rendered on page*
 
 
-![gif of random user and user's pantry on page load](./src/images/updating-server.gif)</br>
-*Random user and user's pantry contents on page load*
+![gif of data updated on Postman to server](./images/updating-server.gif)</br>
+*Viewing data added on Postman and rendered on page*
 
 
 
