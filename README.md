@@ -6,7 +6,7 @@
 
 ### Abstract
 This project serves to showcase my ability to create an Express server with data. 
-When serving as server, the user can get and post information about trails. 
+When serving as server, the user can get and post information about hiking trails. 
 
 ### Tech/ Systems Used
 - Express

@@ -1,9 +1,11 @@
+// import {nanoid} from 'nanoid'
+
 const express = require('express');
 const { response } = require('express');
 const app = express()
 
 app.set('port', process.env.PORT || 3000)
-app.locals.title = 'Trails';
+app.locals.title = 'Hiking Trails';
 
 app.use(express.json());
 
@@ -12,7 +14,7 @@ app.get('/', (request, response) => {
 })
 
 app.listen(app.get('port'), () => {
-  console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
+  console.log(`Howdy! Get trail data and go hiking. ${app.locals.title} is running on http://localhost:${app.get('port')}.`);
 })
 
 
@@ -24,7 +26,7 @@ app.locals.trails = [
 
 app.get('/api/v1/trails', (request, response) => {
   const trails = app.locals.trails
-  response.json({ trails }).send(trails)
+  response.status(200).json({ trails })
 })
 
 app.get('/api/v1/trails/:id', (request, response) => {
@@ -54,3 +56,11 @@ app.post('/api/v1/trails', (request, response) => {
   app.locals.trails.push({ id, name, location, difficulty, distance })
   response.status(201).json({ id, name, location, difficulty, distance })
 })
+
+app.delete('/api/v1/trails', (request, response) => {
+  const id = request.params.id
+  app.locals.trails.filter(trail => trail.id !== id)
+  response.status(200).json(trail);
+})
+
+
