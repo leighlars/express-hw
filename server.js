@@ -40,16 +40,14 @@ app.get('/api/v1/trails/:id', (request, response) => {
 
 app.post('/api/v1/trails', (request, response) => {
   const id = Date.now();
-  const trail = request.body;
+  const {name, location, difficulty, distance} = request.body;
 
   for (let requiredParameter of ['name', 'location', 'difficulty', 'distance']) {
-    if (!trail[requiredParameter]) {
-      return response
-        .status(422)
-        .send({
-          error: `Expected format: {name: <String>, location: <String>, difficulty: <String>, distance: <String> } 
-      You're missing a "${requiredParameter}" property.`
-        });
+    if (!{ name, location, difficulty, distance }[requiredParameter]) {
+     return response.status(422).send({
+      error: `Expected format: {name: <String>, location: <String>, difficulty: <String>, distance: <String> } 
+      You're missing a "${requiredParameter}" property.`,
+     });
     }
   }
 
@@ -61,6 +59,12 @@ app.delete('/api/v1/trails', (request, response) => {
   const id = request.params.id
   app.locals.trails.filter(trail => trail.id !== id)
   response.status(200).json(trail);
+})
+
+app.patch('/api/v1/trails', (request, response) => {
+    const id = request.params.id;
+    const foundTrail = app.locals.trails.filter(trail => trail.id === id)
+
 })
 
 
