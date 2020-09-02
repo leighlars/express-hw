@@ -52,18 +52,27 @@ app.post('/api/v1/trails', (request, response) => {
   }
 
   app.locals.trails.push({ id, name, location, difficulty, distance })
-  response.status(201).json({ id, name, location, difficulty, distance })
+  response.status(200).json({ id, name, location, difficulty, distance })
 })
 
+
+// not working
 app.delete('/api/v1/trails', (request, response) => {
   const id = request.params.id
-  app.locals.trails.filter(trail => trail.id !== id)
-  response.status(200).json(trail);
+  const trails = app.locals.trails
+  if (!id) {
+    return response.status(404).send({
+      error: `Trail entry with id "${Number(id)}" not found.`
+    })
+  } 
+
+  trails = app.locals.trails.trails(trail => trail.id !== id)
+  response.status(200).json({trails});
 })
 
 app.patch('/api/v1/trails', (request, response) => {
     const id = request.params.id;
-    const foundTrail = app.locals.trails.filter(trail => trail.id === id)
+    const foundTrail = app.locals.trails.find(trail => trail.id === id)
 
 })
 
